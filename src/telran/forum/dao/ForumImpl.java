@@ -92,22 +92,14 @@ public class ForumImpl implements Interface{
 
     @Override
     public Post[] getPostsByAuthor(String author) {
-        Post[] res = new Post[size];
-        int j = 0;
-        for (int i = 0; i < size; i++) {
-            if (posts[i].getAuthor().equals(author)){
-                res[j++] = posts[i];
-            }
-        }
-
-        return Arrays.copyOfRange(res, 0, j);
+        return getPostsByAuthor(author, LocalDate.MIN, LocalDate.MAX);
     }
 
     @Override
     public Post[] getPostsByAuthor(String author, LocalDate dateFrom, LocalDate dateTo) {
 
         int indexFrom = getIndexOfElement(Integer.MIN_VALUE, author, dateFrom);
-        int indexto = getIndexOfElement(Integer.MAX_VALUE - 1, author, dateTo);
+        int indexto = getIndexOfElement(Integer.MAX_VALUE, author, dateTo);
 
         return Arrays.copyOfRange(posts, indexFrom, indexto);
     }
@@ -119,7 +111,6 @@ public class ForumImpl implements Interface{
 
         int index = Arrays.binarySearch(posts, 0, size, pattern, comparator);
         return index > 0? index: -index - 1;
-
     }
 
     @Override
