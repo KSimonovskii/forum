@@ -35,7 +35,7 @@ class InterfaceTest {
         posts[3].setDate(now.plusDays(1));
         posts[4].setDate(now.plusHours(8));
 
-        Arrays.sort(posts, (p1, p2) -> p1.getDate().compareTo(p2.getDate()));
+        //Arrays.sort(posts, (p1, p2) -> p1.getDate().compareTo(p2.getDate()));
 
         for (int i = 0; i < posts.length; i++) {
             forum.addPost(posts[i]);
@@ -77,7 +77,7 @@ class InterfaceTest {
 
     @Test
     void testGetPostsByAuthor() {
-        Post[] expected = {posts[0], posts[2], posts[3]};
+        Post[] expected = {posts[0], posts[4], posts[3]};
         Post[] res = forum.getPostsByAuthor("John Doe");
 
         assertArrayEquals(expected, res);
@@ -86,7 +86,7 @@ class InterfaceTest {
 
     @Test
     void testGetPostsByAuthorOverride() {
-        Post[] expected = {posts[2], posts[3]};
+        Post[] expected = {posts[4], posts[3]};
         Post[] res = forum.getPostsByAuthor("John Doe", LocalDate.now().minusDays(1), LocalDate.now().plusDays(2));
 
         assertArrayEquals(expected, res);
