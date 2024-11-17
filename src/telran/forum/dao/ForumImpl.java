@@ -10,13 +10,18 @@ public class ForumImpl implements Interface{
     private Post[] posts;
     private int size;
     private final Comparator<Post> comparator = (p1, p2) -> {
-        int res = p1.getDate().compareTo(p2.getDate());
-        return res == 0? Integer.compare(p1.getPostId(), p2.getPostId()): res;
+        int res = p1.getAuthor().compareTo(p2.getAuthor());
+        return res == 0? p1.getDate().compareTo(p2.getDate()) : res;
     };
 
     public ForumImpl(Post[] posts) {
         this.posts = posts;
         size = posts.length;
+    }
+
+    public ForumImpl(){
+        this.posts = new Post[0];
+        size = 0;
     }
 
     public Post[] getPosts() {
